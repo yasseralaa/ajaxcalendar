@@ -1,7 +1,7 @@
 AjaxCalendar
 =============
 
-![ScreenShot](https://github.com/yasseralaa/ajaxcalendar/blob/master/screenshot.png)
+![ScreenShot](https://github.com/yasseralaa/ajaxcalendar/blob/master/Screenshot.png)
 
 **Description**
 
