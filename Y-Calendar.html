@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/ycalendar.js"></script>
+    <script>
+        function getajax($day,$month,$year) {
+            //GET
+            jQuery.ajax({
+                type: "GET",
+                url: "testajax.txt",
+                dataType: 'text',
+                data: {},
+                success: function(res) {
+                    $("#testajaxtext").html(res);
+                },
+                error: function(xhr, textStatus, errorThrown){
+                    $("#testajaxtext").html(textStatus);
+                }
+            });
+        }
+    </script>
+
+</head>
+<div>
+    <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+    <table class="table" style="text-align: center;">
+        <tr>
+            <td colspan="2"><button class="btn btn-primary" type="button" id="backyear"><span class="glyphicon glyphicon-chevron-left"></span></button></td>
+            <td style="font-weight: bold;font-size: 30px;" colspan="4" id="currentyear"></td>
+            <td colspan="2"><button class="btn btn-primary" type="button" id="nextyear"><span class="glyphicon glyphicon-chevron-right"></span></button></td>
+
+        </tr>
+        <tr>
+            <td style="font-weight: bold;font-size: 25px;" colspan="6" id="currentmonth"></td>
+            <td colspan="2">
+                <button class="btn btn-info" type="button" id="backmonth"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                <button class="btn btn-info" type="button" id="nextmonth"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            </td>
+        </tr>
+        <tr style="font-weight: bold;">
+            <td class="col-sm-1" id="dayname1"></td>
+            <td class="col-sm-1" id="dayname2"></td>
+            <td class="col-sm-1" id="dayname3"></td>
+            <td class="col-sm-1" id="dayname4"></td>
+            <td class="col-sm-1" id="dayname5"></td>
+            <td class="col-sm-1" id="dayname6"></td>
+            <td class="col-sm-1" id="dayname7"></td>
+        </tr>
+        <tr>
+            <td class="col-sm-1" id="day1"></td>
+            <td class="col-sm-1" id="day2"></td>
+            <td class="col-sm-1" id="day3"></td>
+            <td class="col-sm-1" id="day4"></td>
+            <td class="col-sm-1" id="day5"></td>
+            <td class="col-sm-1" id="day6"></td>
+            <td class="col-sm-1" id="day7"></td>
+        </tr>
+        <tr>
+            <td id="day8"></td>
+            <td id="day9"></td>
+            <td id="day10"></td>
+            <td id="day11"></td>
+            <td id="day12"></td>
+            <td id="day13"></td>
+            <td id="day14"></td>
+        </tr>
+        <tr>
+            <td id="day15"></td>
+            <td id="day16"></td>
+            <td id="day17"></td>
+            <td id="day18"></td>
+            <td id="day19"></td>
+            <td id="day20"></td>
+            <td id="day21"></td>
+        </tr>
+        <tr>
+            <td id="day22"></td>
+            <td id="day23"></td>
+            <td id="day24"></td>
+            <td id="day25"></td>
+            <td id="day26"></td>
+            <td id="day27"></td>
+            <td id="day28"></td>
+        </tr>
+        <tr>
+            <td id="day29"></td>
+            <td id="day30"></td>
+            <td id="day31"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<div class="col-sm-2"></div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<strong>Day: </strong><p id="dayresult"></p>
+        <strong>Month: </strong><p id="monthresult"></p>
+        <strong>Year: </strong><p id="yearresult"></p>
+        <strong>Data: </strong><p id="testajaxtext"></p>
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+
+</div>
