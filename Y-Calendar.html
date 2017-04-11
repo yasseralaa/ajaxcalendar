@@ -7,6 +7,9 @@
     <script src="js/ycalendar.js"></script>
     <script>
         function getajax($day,$month,$year) {
+            var mydate = new Date($day+", "+$month+", "+$year);
+            $("#date").html(mydate.toString().substring(0, 16));
+
             //GET
             jQuery.ajax({
                 type: "GET",
@@ -104,9 +107,12 @@
 <div class="row">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
-		<strong>Day: </strong><p id="dayresult"></p>
-        <strong>Month: </strong><p id="monthresult"></p>
-        <strong>Year: </strong><p id="yearresult"></p>
+        <h2 id="date">
+            <script>
+                var initdate = new Date();
+                document.write(initdate.toString().substring(0, 16));
+            </script>
+        </h2>
         <strong>Data: </strong><p id="testajaxtext"></p>
 	</div>
 	<div class="col-sm-2"></div>

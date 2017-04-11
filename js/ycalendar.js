@@ -2,9 +2,16 @@ var months = {1: "January", 2: "February", 3: "March",4: "April",5: "May",6: "Ju
 var date = new Date();
 $(document).ready(function() {
     //init
+    $today = date.getDate();
+    $thismonth = date.getMonth();
+    $thisyear = date.getFullYear();
     $('#currentyear').html(date.getFullYear());
     $('#currentmonth').html(months[date.getMonth() + 1]);
     days_generator(date.getMonth() + 1, date.getFullYear());
+    if(date.getFullYear() == $thisyear && months[date.getMonth() + 1] == months[$thismonth + 1])
+        $("#day" + date.getDate().toString()).addClass('bg-info');
+    else
+        $("#day" + date.getDate().toString()).removeClass('bg-info');
     operate();
 
     //Years
@@ -12,13 +19,23 @@ $(document).ready(function() {
         date.setFullYear(date.getFullYear() + 1);
         days_generator(date.getMonth() + 1, date.getFullYear());
         $("#currentyear").html(date.getFullYear());
+        if(date.getFullYear() == $thisyear && months[date.getMonth() + 1] == months[$thismonth + 1])
+            $("#day" + date.getDate().toString()).addClass('bg-info');
+        else
+            $("#day" + date.getDate().toString()).removeClass('bg-info');
         operate();
+
     });
     $("#backyear").click(function () {
         date.setFullYear(date.getFullYear() - 1);
         days_generator(date.getMonth() + 1, date.getFullYear());
         $("#currentyear").html(date.getFullYear());
+        if(date.getFullYear() == $thisyear && months[date.getMonth() + 1] == months[$thismonth + 1])
+            $("#day" + date.getDate().toString()).addClass('bg-info');
+        else
+            $("#day" + date.getDate().toString()).removeClass('bg-info');
         operate();
+
     });
 
     //Months
@@ -27,6 +44,10 @@ $(document).ready(function() {
         days_generator(date.getMonth() + 1, date.getFullYear());
         $("#currentmonth").html(months[date.getMonth() + 1]);
         $("#currentyear").html(date.getFullYear());
+        if(date.getFullYear() == $thisyear && months[date.getMonth() + 1] == months[$thismonth + 1])
+            $("#day" + date.getDate().toString()).addClass('bg-info');
+        else
+            $("#day" + date.getDate().toString()).removeClass('bg-info');
         operate();
     });
     $("#backmonth").click(function () {
@@ -34,6 +55,10 @@ $(document).ready(function() {
         days_generator(date.getMonth() + 1, date.getFullYear());
         $("#currentmonth").html(months[date.getMonth() + 1]);
         $("#currentyear").html(date.getFullYear());
+        if(date.getFullYear() == $thisyear && months[date.getMonth() + 1] == months[$thismonth + 1])
+            $("#day" + date.getDate().toString()).addClass('bg-info');
+        else
+            $("#day" + date.getDate().toString()).removeClass('bg-info');
         operate();
     });
 
@@ -348,27 +373,39 @@ function days_generator($month, $year)
 }
 
 function operate(){
-    	$('td[id^="day"]').each(function(i, value) {
-    			$("#monthresult").html($("#currentmonth").text());
-				$("#yearresult").html($("#currentyear").text());
-            	if($.isNumeric(value.innerHTML))
-            	{
-    			$(this).hover(function () {
-					$(this).addClass('active');
-					$("#dayresult").html(value.innerHTML);
-					$day = value.innerHTML;
-					$month = $("#currentmonth").text();
-					$year = $("#currentyear").text();
+    $('td[id^="day"]').each(function(i, value) {
+        $("#monthresult").html($("#currentmonth").text());
+        $("#yearresult").html($("#currentyear").text());
+        if($.isNumeric(value.innerHTML))
+        {
+            $(this).hover(function () {
+                if ($.isNumeric($(this).text()))
+                    $(this).addClass('active');
+            }, function() {
+                $(this).removeClass("active");
+            });
+            $(this).click(function () {
+                if ($.isNumeric($(this).text())){
+                    $(this).addClass('active');
+                    $day = value.innerHTML;
+                    $month = $("#currentmonth").text();
+                    $year = $("#currentyear").text();
+                    unactiveOthers($day);
                     //Calling get request
-                    getajax($day,$month,$year);
-				}, function() {
-			    	$(this).removeClass("active");
-			  	});
-			  	}
-			  	else{
-			  		$(this).hover(function () {
-					$(this).removeClass("active");
-					});
-			  	}
-			});
-    }
+                    getajax($day, $month, $year);
+                }
+            });
+        }
+
+    });
+}
+
+function unactiveOthers($except)
+{
+    $('td[id^="day"]').each(function(i, value) {
+        if($.isNumeric(value.innerHTML) && value.innerHTML != $except)
+        {
+            $(this).removeClass("active");
+        }
+    });
+}
